@@ -22,7 +22,7 @@ public class DigitalClock extends JFrame {
         setLayout(new BorderLayout());
         setResizable(true);
         setVisible(false);
-        setIconImage(Toolkit.getDefaultToolkit().getImage("image.png"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage("clock.png"));
 
         // Create and style the time label
         timeLabel = new JLabel("", JLabel.CENTER);
@@ -34,9 +34,9 @@ public class DigitalClock extends JFrame {
 
         // Create and style the date label
         dateLabel = new JLabel("", JLabel.CENTER);
-        dateLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        dateLabel.setFont(new Font("Arial", Font.ITALIC, 20));
         dateLabel.setOpaque(true);
-        dateLabel.setBackground(Color.GRAY);
+        dateLabel.setBackground(Color.DARK_GRAY);
         dateLabel.setForeground(Color.yellow);
         add(dateLabel, BorderLayout.CENTER);
 

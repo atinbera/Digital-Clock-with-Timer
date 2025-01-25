@@ -24,7 +24,7 @@ This project is a digital clock application with a built-in timer, designed to h
 
 1. **Clone the Repository**: 
     ```sh
-    git clone https://github.com/yourusername/digital-clock-timer.git
+    git clone https://github.com/atinbera/Digital-Clock-with-Timer.git
     ```
 2. **Navigate to the Project Directory**:
     ```sh
@@ -41,8 +41,8 @@ This project is a digital clock application with a built-in timer, designed to h
 
 ## Screenshots
 
-![Digital Clock](screenshots/digital_clock.png)
-!Timer
+<img src="image.png" alt="Digital Clock" width="300"/>
+
 
 ## License
 
@@ -54,4 +54,4 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 
 ## Contact
 
-For any questions or suggestions, please contact [yourname@example.com](mailto:yourname@example.com).
+For any questions or suggestions, please contact [Atin](mailto:atinb.cse.jisu21@gmail.com).
