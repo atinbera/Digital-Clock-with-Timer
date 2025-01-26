@@ -1,6 +1,10 @@
-// Java Library 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -19,10 +23,23 @@ public class DigitalClock extends JFrame {
         setTitle("Digital Clock with Timer");
         setSize(600, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
+        setLayout(new GridBagLayout()); // Set layout to GridBagLayout
+        setResizable(false);
         setResizable(true);
-        setVisible(false);
-        setIconImage(Toolkit.getDefaultToolkit().getImage("clock.png"));
+        setVisible(true);
+
+        // Set the icon image
+        try {
+            setIconImage(Toolkit.getDefaultToolkit().getImage("clock.png"));
+        } catch (Exception e) {
+            System.out.println("Clock icon not found, continuing without it.");
+        }
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
 
         // Create and style the time label
         timeLabel = new JLabel("", JLabel.CENTER);
@@ -30,15 +47,16 @@ public class DigitalClock extends JFrame {
         timeLabel.setOpaque(true);
         timeLabel.setBackground(Color.BLACK);
         timeLabel.setForeground(Color.CYAN);
-        add(timeLabel, BorderLayout.NORTH);
+        add(timeLabel, gbc);
 
         // Create and style the date label
+        gbc.gridy = 1;
         dateLabel = new JLabel("", JLabel.CENTER);
         dateLabel.setFont(new Font("Arial", Font.ITALIC, 20));
         dateLabel.setOpaque(true);
         dateLabel.setBackground(Color.DARK_GRAY);
-        dateLabel.setForeground(Color.yellow);
-        add(dateLabel, BorderLayout.CENTER);
+        dateLabel.setForeground(Color.YELLOW);
+        add(dateLabel, gbc);
 
         // Create a panel for the timer input and buttons
         JPanel timerPanel = new JPanel();
@@ -76,7 +94,9 @@ public class DigitalClock extends JFrame {
         timerPanel.add(stopTimerButton);
 
         // Add the timer panel to the frame
-        add(timerPanel, BorderLayout.SOUTH);
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;
+        add(timerPanel, gbc);
 
         // Start updating the clock
         startClock();
@@ -92,8 +112,8 @@ public class DigitalClock extends JFrame {
 
             // Combine the current time and timer display
             String timerText = countdownSeconds > 0
-                ? String.format(" Timer: %02d:%02d", countdownSeconds / 60, countdownSeconds % 60)
-                : "| Timer: 00:00";
+                ? String.format(" | Timer: %02d:%02d", countdownSeconds / 60, countdownSeconds % 60)
+                : " | Timer: 00:00";
 
             // Update the time label
             timeLabel.setText(currentTime + timerText);
@@ -124,6 +144,7 @@ public class DigitalClock extends JFrame {
                 countdownSeconds--;
             } else {
                 countdownTimer.stop();
+                playSound("soft-piano.wav");
                 JOptionPane.showMessageDialog(this, "Time's up!");
             }
         });
@@ -139,6 +160,17 @@ public class DigitalClock extends JFrame {
         if (countdownTimer != null) {
             countdownTimer.stop();
             countdownSeconds = 0;
+        }
+    }
+    private void playSound(String soundFile) {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundFile).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            System.out.println("Error playing sound.");
+            ex.printStackTrace();
         }
     }
 
