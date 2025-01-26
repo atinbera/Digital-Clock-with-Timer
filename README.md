@@ -41,7 +41,7 @@ This project is a digital clock application with a built-in timer, designed to h
 
 ## Screenshots
 
-<img src="image.png" alt="Digital Clock" width="300"/>
+<img src="image-1.png" alt="Digital Clock" width="300"/>
 
 
 ## License
